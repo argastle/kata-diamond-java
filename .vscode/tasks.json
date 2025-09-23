@@ -6,14 +6,14 @@
         {
             "label": "mvn verify",
             "type": "shell",
-            "command": "mvn --batch-mode verify",
+            "command": "mvn verify",
             "problemMatcher": [],
             "group": "build"
         },
         {
             "label": "mvn test",
             "type": "shell",
-            "command": "mvn --batch-mode test",
+            "command": "mvn test",
             "group": "test",
             "problemMatcher": []
         }
