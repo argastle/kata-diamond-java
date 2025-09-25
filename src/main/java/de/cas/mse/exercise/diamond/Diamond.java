@@ -1,31 +1,49 @@
 package de.cas.mse.exercise.diamond;
 
-import java.util.Arrays;
-
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
-			return null;
+	public String print(int maxDiamondWidth) {
+
+		if (isInvaildInput(maxDiamondWidth)) {
+			return null;	
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		
+		String result = generateMiddleRow(maxDiamondWidth);
+		for (int currentWidth = maxDiamondWidth - 2; currentWidth > 0; currentWidth -= 2) {
+			String currentRow = generateRow(maxDiamondWidth, currentWidth);
+			result = currentRow + result + currentRow;
 		}
-		return builder.toString();
+		return result;
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private String generateMiddleRow(int width){
+		return generateRow(width, width);
+	}
+	private String generateRow(int maxWidth, int currentWidth) {
+		int spaces = ((maxWidth - currentWidth) / 2);
+		String row = "";
+		row = appendSpaces(row, spaces);
+		row = appendStars(row, currentWidth);
+		return row + "\n";
+	}
+
+	private boolean isInvaildInput(int width){
+		return (width <= 0 || width % 2 == 0);
+	}
+
+	private String appendSpaces(String current, int amount){
+		return appendChars(current, amount, ' ');
+	}
+
+	private String appendStars(String current, int amount){
+		return appendChars(current, amount, '*');
+	}
+
+	private String appendChars(String current, int amount, char symbol){
+		for (int i = 0; i < amount; i++){
+			current += symbol;
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		return current;
 	}
 
 }
