@@ -4,7 +4,7 @@ public class Diamond {
 
 	public String print(int maxDiamondWidth) {
 
-		if (isInvaildInput(maxDiamondWidth)) {
+		if (isInvalidInput(maxDiamondWidth)) {
 			return null;	
 		}
 		
@@ -19,15 +19,16 @@ public class Diamond {
 	private String generateMiddleRow(int width){
 		return generateRow(width, width);
 	}
-	private String generateRow(int maxWidth, int currentWidth) {
-		int spaces = ((maxWidth - currentWidth) / 2);
+
+	private String generateRow(int maxWidth, int amountOfStars) {
+		int spaces = ((maxWidth - amountOfStars) / 2);
 		String row = "";
 		row = appendSpaces(row, spaces);
-		row = appendStars(row, currentWidth);
+		row = appendStars(row, amountOfStars);
 		return row + "\n";
 	}
 
-	private boolean isInvaildInput(int width){
+	private boolean isInvalidInput(int width){
 		return (width <= 0 || width % 2 == 0);
 	}
 
